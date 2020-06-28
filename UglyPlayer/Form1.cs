@@ -21,6 +21,7 @@ namespace UglyPlayer
         private PlayedRemainingType _playedRemaining = PlayedRemainingType.Remaining;
 
         public TrackEntry CurrentTrack;
+        private Details _details;
 
         public MainForm()
         {
@@ -144,6 +145,9 @@ namespace UglyPlayer
 
             FolderBrowserDialog.SelectedPath = "C:\\Data\\Examples";
             FolderBrowserDialog.ShowDialog();
+
+            StopTrack();
+
             var folder = FolderBrowserDialog.SelectedPath;
 
             var fileList = Directory.GetFiles(folder);
@@ -182,6 +186,11 @@ namespace UglyPlayer
             loadFilesButton.BackColor = Color.FromKnownColor(KnownColor.Control);
         }
 
+        private void Details_Click(object sender, EventArgs e)
+        {
+            SetDetails(CurrentTrack);
+        }
+
         private void SetTrackToPlay(TrackEntry selectedTrack)
         {
             StopTrack();
@@ -189,6 +198,9 @@ namespace UglyPlayer
             CurrentTrack = selectedTrack;
             _currentSound = _player.Play2D(selectedTrack.Filename);
             _currentSound.setSoundStopEventReceiver(new Event(this));
+
+            if (_details != null && _details.Visible)
+                SetDetails(CurrentTrack);
 
             UpdateTrackInfo(selectedTrack);
 
@@ -228,6 +240,17 @@ namespace UglyPlayer
             if (!_currentSound.Finished)
                 _currentSound.Stop();
             _currentSound = null;
+        }
+
+        private void SetDetails(TrackEntry trackEntry)
+        {
+            if (_details == null || _details.IsDisposed)
+                _details = new Details();
+
+            if (_details.Visible == false)
+                _details.Show(this);
+
+            _details.LoadTrack(trackEntry);
         }
     }
 }

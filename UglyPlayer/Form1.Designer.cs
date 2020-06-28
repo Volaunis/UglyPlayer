@@ -36,6 +36,7 @@
             this.Artist = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Details = new System.Windows.Forms.PictureBox();
             this.PlayedRemaining = new System.Windows.Forms.PictureBox();
             this.LoadFiles = new System.Windows.Forms.PictureBox();
             this.Stop = new System.Windows.Forms.PictureBox();
@@ -53,6 +54,7 @@
             this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Details)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayedRemaining)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LoadFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Stop)).BeginInit();
@@ -126,6 +128,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.Details);
             this.groupBox1.Controls.Add(this.PlayedRemaining);
             this.groupBox1.Controls.Add(this.LoadFiles);
             this.groupBox1.Controls.Add(this.Stop);
@@ -140,12 +143,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Controls";
             // 
+            // Details
+            // 
+            this.Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Details.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Details.Image = ((System.Drawing.Image)(resources.GetObject("Details.Image")));
+            this.Details.Location = new System.Drawing.Point(705, 25);
+            this.Details.Name = "Details";
+            this.Details.Size = new System.Drawing.Size(64, 64);
+            this.Details.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Details.TabIndex = 7;
+            this.Details.TabStop = false;
+            this.Details.Click += new System.EventHandler(this.Details_Click);
+            // 
             // PlayedRemaining
             // 
             this.PlayedRemaining.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PlayedRemaining.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PlayedRemaining.Image = ((System.Drawing.Image)(resources.GetObject("PlayedRemaining.Image")));
-            this.PlayedRemaining.Location = new System.Drawing.Point(775, 24);
+            this.PlayedRemaining.Location = new System.Drawing.Point(775, 25);
             this.PlayedRemaining.Name = "PlayedRemaining";
             this.PlayedRemaining.Size = new System.Drawing.Size(64, 64);
             this.PlayedRemaining.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -341,6 +357,7 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Details)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayedRemaining)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LoadFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Stop)).EndInit();
@@ -376,6 +393,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TrackAlbum;
         private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
         private System.Windows.Forms.PictureBox PlayedRemaining;
+        private System.Windows.Forms.PictureBox Details;
     }
 }
 

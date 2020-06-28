@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ATL;
 
 namespace UglyPlayer.Models
 {
@@ -20,21 +21,23 @@ namespace UglyPlayer.Models
             var fileType = new FileInfo(filename).Extension;
             TrackTitle = new FileInfo(filename).Name;
 
-            if (new FileInfo(filename).Extension.ToLower() != ".mp3") return; 
+            //if (new FileInfo(filename).Extension.ToLower() != ".mp3") return; 
                 
-            var tag = TagLib.File.Create(filename);
+            var tag = new Track(filename);
 
             if (!string.IsNullOrWhiteSpace(TrackTitle))
-                TrackTitle = tag.Tag.Title; // Overrides above
+                TrackTitle = tag.Title; // Overrides above
 
             TrackArtist =
-                (!string.IsNullOrWhiteSpace(tag.Tag.JoinedAlbumArtists))
-                    ? tag.Tag.JoinedAlbumArtists
-                    : tag.Tag.JoinedPerformers;
+                (!string.IsNullOrWhiteSpace(tag.AlbumArtist))
+                    ? tag.AlbumArtist
+                    : tag.Artist;
 
-            TrackAlbum = tag.Tag.Album;
+            TrackAlbum = tag.Album;
 
-            Duration = tag.Properties.Duration.TotalSeconds;
+            Comments = string.Join(Environment.NewLine, tag.Comment.Split(';'));
+
+            Duration = tag.Duration;
             
         }
 
@@ -47,7 +50,9 @@ namespace UglyPlayer.Models
 
         public string TrackAlbum { get; set; }
 
-        public double Duration { get; set; }
+        public string Comments { get; set; }
+
+        public int Duration { get; set; }
 
         public string DurationString
         {
