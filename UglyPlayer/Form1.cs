@@ -188,7 +188,8 @@ namespace UglyPlayer
 
         private void Details_Click(object sender, EventArgs e)
         {
-            SetDetails(CurrentTrack);
+            var selectedTrack = (TrackEntry)TracksList.SelectedRows[0].DataBoundItem;
+            SetDetails(selectedTrack);
         }
 
         private void SetTrackToPlay(TrackEntry selectedTrack)
@@ -211,6 +212,8 @@ namespace UglyPlayer
 
         private void UpdateTrackInfo(TrackEntry selectedTrack)
         {
+            if (CurrentTrack == null) return;
+
             Title.Text = selectedTrack.TrackTitle;
             Artist.Text = selectedTrack.TrackArtist;
             Album.Text = selectedTrack.TrackAlbum;
@@ -244,6 +247,8 @@ namespace UglyPlayer
 
         private void SetDetails(TrackEntry trackEntry)
         {
+            if (trackEntry == null) return;
+
             if (_details == null || _details.IsDisposed)
                 _details = new Details();
 
@@ -251,6 +256,12 @@ namespace UglyPlayer
                 _details.Show(this);
 
             _details.LoadTrack(trackEntry);
+        }
+
+        private void TracksList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedTrack = (TrackEntry)TracksList.SelectedRows[0].DataBoundItem;
+            SetDetails(selectedTrack);
         }
     }
 }

@@ -295,6 +295,7 @@
             this.TracksList.ShowEditingIcon = false;
             this.TracksList.Size = new System.Drawing.Size(911, 288);
             this.TracksList.TabIndex = 0;
+            this.TracksList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TracksList_CellClick);
             this.TracksList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TracksList_CellContentDoubleClick);
             // 
             // Playing
